@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "power-cut-companion",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -90, "left": -150, "attrs": {} },
+    { "type": "wokwi-ds18b20", "id": "temp1", "top": -110, "left": 150, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn1", "top": 200, "left": -120, "attrs": { "color": "blue" } },
+    { "type": "wokwi-led", "id": "ledR", "top": 230, "left": 120, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "ledY", "top": 230, "left": 180, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-led", "id": "ledG", "top": 230, "left": 240, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "rR", "top": 170, "left": 110, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rY", "top": 170, "left": 170, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rG", "top": 170, "left": 230, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    ["esp:TX", "$serialMonitor:RX", "", []],
+    ["esp:RX", "$serialMonitor:TX", "", []],
+
+    ["pot1:VCC", "esp:3V3", "red", []],
+    ["pot1:GND", "esp:GND.1", "black", []],
+    ["pot1:SIG", "esp:34", "green", []],
+
+    ["temp1:VCC", "esp:3V3", "red", []],
+    ["temp1:GND", "esp:GND.1", "black", []],
+    ["temp1:DQ", "esp:4", "yellow", []],
+
+    ["btn1:1.l", "esp:12", "blue", []],
+    ["btn1:2.l", "esp:GND.1", "black", []],
+
+    ["esp:25", "rR:1", "red", []],
+    ["rR:2", "ledR:A", "red", []],
+    ["ledR:C", "esp:GND.2", "black", []],
+
+    ["esp:26", "rY:1", "gold", []],
+    ["rY:2", "ledY:A", "gold", []],
+    ["ledY:C", "esp:GND.2", "black", []],
+
+    ["esp:27", "rG:1", "green", []],
+    ["rG:2", "ledG:A", "green", []],
+    ["ledG:C", "esp:GND.2", "black", []]
+  ],
+  "dependencies": {}
+}
